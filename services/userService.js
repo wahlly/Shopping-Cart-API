@@ -1,10 +1,9 @@
-const { Users } = require('../models/index')
+const { User } = require('../models/index')
 const bcrypt = require('bcrypt')
-
 module.exports = class UserService{
     static async userRegistration(profile) {
         try {
-            let user = await Users.build({
+            let user = await User.build({
                 firstName: profile.firstName,
                 lastName: profile.lastName,
                 email: profile.email,
@@ -16,6 +15,15 @@ module.exports = class UserService{
         }
         catch(err) {
             console.error(err.message)
+        }
+    }
+
+    static async userAuthentication(email) {
+        try {
+            
+        }
+        catch(err) {
+            
         }
     }
 }
