@@ -1,5 +1,4 @@
 const { userRegistration } = require('../services/userService')
-
 module.exports = class UserController{
     static async registerUser(req, res) {
         try{
@@ -7,6 +6,7 @@ module.exports = class UserController{
         if(!user) {
             return res.status(400).json({ err: 'Bad request, try again' })
         }
+        user.password = undefined
         return res.status(200).json(user)
         }
         catch(err) {

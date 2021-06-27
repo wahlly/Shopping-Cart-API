@@ -20,10 +20,10 @@ module.exports = class UserService{
 
     static async userAuthentication(email) {
         try {
-            
+            return await User.findOne({ where: {email: email} })
         }
         catch(err) {
-            
+            console.error(err)
         }
     }
 }
