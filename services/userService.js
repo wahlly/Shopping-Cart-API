@@ -1,11 +1,10 @@
-const { User } = require('../models/index')
+const { Users, cartItems } = require('../models/index')
 const bcrypt = require('bcrypt')
 module.exports = class UserService{
     static async userRegistration(profile) {
         try {
-            let user = await User.build({
-                firstName: profile.firstName,
-                lastName: profile.lastName,
+            let user = await Users.build({
+                name: profile.name,
                 email: profile.email,
                 password: profile.password
             })
@@ -20,7 +19,22 @@ module.exports = class UserService{
 
     static async userAuthentication(email) {
         try {
-            return await User.findOne({ where: {email: email} })
+            return await Users.findOne({ where: {email: email} })
+        }
+        catch(err) {
+            console.error(err)
+        }
+    }
+
+    static async itemSelections(userId, details) {
+        try {
+            return await cartItems.create({
+                product: details.product,
+                qty: details.qty,
+                price: details.price,
+                amount: details.qty * details.price,
+                userId: userId
+            })
         }
         catch(err) {
             console.error(err)
